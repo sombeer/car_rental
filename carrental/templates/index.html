@@ -1,0 +1,159 @@
+ {% extends 'base.html' %}
+
+ {% block title %}HILL DRIVE - CAR RENTAL SERVICE,SELF DRIVE CARS {% endblock title %}
+
+ {% block page-content %}
+
+ {% load static %}
+
+ <!--FLEX IMAGE-->   
+ <div class="flex-fill" style="background-image: url({% static 'images/bg_1.jpg' %} );" data-stellar-background-ratio="0.6">
+	<div class="overlay"></div>
+	<div class="container">
+	  <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+		<div class="col-lg-8 ftco-animate">
+			<div class="text w-100 text-center mb-md-5 pb-md-5">
+			  <h1 class="mb-4">HILL DRIVE</h1>
+			  <p style="font-size: 18px;">Fast &amp; Easy Way To Rent A Car</p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+<!--BOOKING SELECTOR-->
+   <section class="ftco-section ftco-no-pt bg-light">
+	  <div class="container">
+		  <div class="row no-gutters">
+			  <div class="col-md-12	featured-top">
+				  <div class="row no-gutters">
+						<div class="col-md-4 d-flex align-items-center">
+							<form action="#" class="request-form ftco-animate bg-primary">
+						<h2>Make your trip</h2>
+							  <div class="form-group">
+								  <label for="" class="label">Pick-up location</label>
+								  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+							  </div>
+							  <div class="d-flex">
+								  <div class="form-group mr-2">
+						  <label for="" class="label">Pick-up date</label>
+						  <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+						</div>
+						<div class="form-group ml-2">
+						  <label for="" class="label">Drop-off date</label>
+						  <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+						</div>
+					</div>
+					<div class="form-group">
+					  <label for="" class="label">Pick-up time</label>
+					  <input type="text" class="form-control" id="time_pick" placeholder="Time">
+					</div>
+				   <div class="form-group">
+					  <label for="" class="label">Drop-off time</label>
+					  <input type="text" class="form-control" id="time_drop" placeholder="Time">
+					</div>
+					  <div class="form-group">
+						<input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+					  </div>
+						  </form>
+						</div>  					
+			  </div>
+		</div>
+  </section>
+
+<!--CAR DISPLAY SECTION-->
+  <section class="ftco-section ftco-no-pt bg-light">
+	  <div class="container">
+		  <div class="row justify-content-center">
+		<div class="col-md-12 heading-section text-center ftco-animate mb-5">
+			<span class="subheading">What we offer</span>
+		  <h2 class="mb-2">Feeatured Vehicles</h2>
+		</div>
+	  </div>
+		  <div class="row">
+			  <div class="col-md-12">
+				  <div class="carousel-car owl-carousel">
+					  <div class="item">
+						  <div class="car-wrap rounded ftco-animate">
+							  <div class="img rounded d-flex align-items-end" style="background-image: url({% static 'images/car-1.jpg' %} );">
+							  </div>
+							  <div class="text">
+								  <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+								  <div class="d-flex mb-3">
+									  <span class="cat">Cheverolet</span>
+									  <p class="price ml-auto">$500 <span>/day</span></p>
+								  </div>
+								  <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+							  </div>
+						  </div>
+					  </div>
+					  <div class="item">
+						  <div class="car-wrap rounded ftco-animate">
+							  <div class="img rounded d-flex align-items-end" style="background-image: url({% static 'images/car-2.jpg' %} );">
+							  </div>
+							  <div class="text">
+								  <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+								  <div class="d-flex mb-3">
+									  <span class="cat">Cheverolet</span>
+									  <p class="price ml-auto">$500 <span>/day</span></p>
+								  </div>
+								  <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+							  </div>
+						  </div>
+					  </div>
+					  <div class="item">
+						  <div class="car-wrap rounded ftco-animate">
+							  <div class="img rounded d-flex align-items-end" style="background-image: url({% static 'images/car-3.jpg' %});">
+							  </div>
+							  <div class="text">
+								  <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+								  <div class="d-flex mb-3">
+									  <span class="cat">Cheverolet</span>
+									  <p class="price ml-auto">$500 <span>/day</span></p>
+								  </div>
+								  <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+							  </div>
+						  </div>
+					  </div>
+					  <div class="item">
+						  <div class="car-wrap rounded ftco-animate">
+							  <div class="img rounded d-flex align-items-end" style="background-image: url({% static 'images/car-4.jpg' %} );">
+							  </div>
+							  <div class="text">
+								  <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+								  <div class="d-flex mb-3">
+									  <span class="cat">Cheverolet</span>
+									  <p class="price ml-auto">$500 <span>/day</span></p>
+								  </div>
+								  <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+  </section>
+<!--ABOUT US SECTION-->
+  <section class="ftco-section ftco-about">
+		  <div class="container">
+			  <div class="row no-gutters">
+				  <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'images/about.jpg' %});">
+				  </div>
+				  <div class="col-md-6 wrap-about ftco-animate">
+			<div class="heading-section heading-section-white pl-md-5">
+				<span class="subheading">About us</span>
+			  <h2 class="mb-4">Welcome to HILL Drive</h2>
+
+			  <p>Welcome to Hill Drive, Udaipur's premier self-drive car rental company, established in 2022. With our commitment to excellence and customer satisfaction, we have quickly emerged as the fastest-growing company in the field of car rentals in Rajasthan. 
+
+				  At Hill Drive, we understand the importance of convenience and freedom when it comes to exploring the beautiful city of Udaipur. Our mission is to provide top-notch, hassle-free car rental services that empower our customers to discover the city at their own pace and on their terms.
+				  
+				  <p>We take immense pride in our diverse fleet of well-maintained, high-quality vehicles, ranging from compact cars to spacious SUVs. Our cars are equipped with state-of-the-art technology and safety features to ensure a comfortable and secure journey for our valued customers. Whether you are a solo traveler, a family on vacation, or a group of friends embarking on an adventure, we have the perfect vehicle to suit your needs.</p>
+			  <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+			</div>
+				  </div>
+			  </div>
+		  </div>
+	  </section>
+
+	  {% endblock page-content %}

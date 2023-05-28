@@ -1,11 +1,10 @@
-from django.contrib.auth import authenticate, login
-# Create your views here.
+from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import render, redirect,HttpResponse
 from django.urls import reverse
 from .forms import UserRegistrationForm
 
 def index(request):
-    return HttpResponse('register')
+    return render(request,'index.html')
     
 
 #register user
@@ -35,4 +34,8 @@ def login_view(request):
     else:
         # Display the login form
         return render(request, 'car_rental/login.html')
+    
+def logout_user(request):
+    logout(request)
+    return redirect('/')
     
