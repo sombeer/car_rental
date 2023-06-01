@@ -1,6 +1,102 @@
-<h1>User Registration</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="form-container">
+        <h1>User Registration</h1>
+        <form class="form"  method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for= {{form.first_name.label_id}} > {{form.first_name.label_tag}} </label>
+            <input type="text" name= {{form.first_name.name}} maxlength={{ form.fields.first_name.max_length }} class="form-control" id="{{ form.first_name.id_for_label }}">
+          </div>
+
+          {% if form.errors.category %}
+							<para style="color:red">{{form.errors.first_name}}</para>
+					{% endif %}
+
+          <div class="form-group">
+            <label for={{form.last_name.label_id}} >{{form.last_name.label_tag}}</label>
+            <input type="text" name={{form.last_name.name}} maxlength={{ form.fields.first_name.max_length }} class="form-control" id="{{ form.last_name.id_for_label }}">
+          </div>
+
+          {% if form.errors.last_name %}
+							<para style="color:red">{{form.errors.last_name}}</para>
+					{% endif %}
+
+          <div class="form-group">
+            <label for={{ form.username.label_id}}>{{form.username.label_tag}}</label>
+            <input type="text" name={{form.username.name}} maxlength={{ form.fields.username.max_length }} required class="form-control" id="{{form.username.id_for_label}}">
+            <small class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+          </div>
+
+          {% if form.errors.username %}
+							<para style="color:red">{{form.errors.username}}</para>
+					{% endif %}
+
+          <div class="form-group">
+            <label for={{ form.email.label_id}}>{{form.email.label_tag}}</label>
+            <input type="email" name={{form.email.name}} autofocus required maxlength={{ form.fields.email.max_length }} class="form-control" id="{{form.email.id_for_label}}">
+          </div>
+
+          {% if form.errors.email %}
+          <para style="color:red">{{form.errors.email}}</para>
+          {% endif %}
+
+          <div class="form-group">
+            <label for={{ form.password1.label_id}}> {{form.password1.label_tag}} </label>
+            <input type="password" name={{form.password1.name}} autocomplete="new-password"  class="form-control" id="{{form.password1.id_for_label}}">
+            <small class="form-text text-muted">
+              Your password can’t be too similar to your other personal information.<br>
+              Your password must contain at least 8 characters.<br>
+              Your password can’t be a commonly used password.<br>
+              Your password can’t be entirely numeric.
+            </small>
+          </div>
+
+          {% if form.errors.password1 %}
+          <para style="color:red">{{form.errors.password1}}</para>
+          {% endif %}
+
+          <div class="form-group">
+            <label for={{ form.password2.label_id}} >{{form.password2.label_tag}}</label>
+            <input type="password" name={{form.password2.name}} autocomplete="new-password" class="form-control" id="{{form.password2.id_for_label}}">
+            <small class="form-text text-muted">Enter the same password as before, for verification.</small>
+          </div>
+
+          {% if form.errors.password2 %}
+          <para style="color:red">{{form.errors.password2}}</para>
+          {% endif %}
+
+          <div class="form-group">
+            <label for= {{ form.mobileNo.label_id}} >{{form.mobileNo.label_tag}}</label>
+            <input type="number" name={{form.mobileNo.name}} required class="form-control" id="{{form.mobileNo.id_for_label}}">
+          </div>
+          {% if form.errors.mobileNo %}
+          <para style="color:red">{{form.errors.mobileNo}}</para>
+          {% endif %}
+
+          <div class="form-group">
+            <label for={{ form.drivingLicenseNo.label_id}}>{{form.drivingLicenseNo.label_tag}}</label>
+            <input type="file" name={{form.drivingLicenseNo.name}} class="form-control-file" accept="image/*" id="{{form.drivingLicenseNo.id_for_label}}">
+          </div>
+          {% if form.errors.drivingLicenseNo %}
+          <para style="color:red">{{form.errors.drivingLicenseNo}}</para>
+          {% endif %}
+
+                   
+          <input type="submit" id="register" value="Register" class="btn btn-primary">
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
