@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>User Registration</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+{% extends 'base.html' %}
+{% block title %}{% endblock title %}
+{% block page-content %}
+{% load static %}
+{% block style %}
+<style>
+  .banner {
+    width: 100%;
+  }
+</style>
+{% endblock style %}
+
 </head>
 <body>
+ 
+  <!--banner-->
+  <div class="banner">
+    <img src="{%static 'images/bnr-3.jpg'%}" alt="Image Banner">
+    <div class="banner-text">
+      <h1 class="animate__animated animate__fadeInDown">Welcome to Hill Drive</h1>
+      <p class="animate__animated animate__fadeInUp">Register Fast and get a chance to get off on the first booking</p>
+    </div>
+  </div>
+  <!--form-->
   <div class="container">
     <div class="d-flex justify-content-center">
       <div class="form-container">
@@ -12,21 +29,12 @@
         <form class="form"  method="POST" action="" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
-            <label for= {{form.first_name.label_id}} > {{form.first_name.label_tag}} </label>
-            <input type="text" name= {{form.first_name.name}} maxlength={{ form.fields.first_name.max_length }} class="form-control" id="{{ form.first_name.id_for_label }}">
+            <label for= {{form.name.label_id}} > {{form.name.label_tag}} </label>
+            <input type="text" name= {{form.name.name}} maxlength={{ form.fields.name.max_length }} class="form-control" id="{{ form.name.id_for_label }}">
           </div>
 
-          {% if form.errors.category %}
-							<para style="color:red">{{form.errors.first_name}}</para>
-					{% endif %}
-
-          <div class="form-group">
-            <label for={{form.last_name.label_id}} >{{form.last_name.label_tag}}</label>
-            <input type="text" name={{form.last_name.name}} maxlength={{ form.fields.first_name.max_length }} class="form-control" id="{{ form.last_name.id_for_label }}">
-          </div>
-
-          {% if form.errors.last_name %}
-							<para style="color:red">{{form.errors.last_name}}</para>
+          {% if form.errors.name %}
+							<para style="color:red">{{form.errors.name}}</para>
 					{% endif %}
 
           <div class="form-group">
@@ -74,11 +82,11 @@
           {% endif %}
 
           <div class="form-group">
-            <label for= {{ form.mobileNo.label_id}} >{{form.mobileNo.label_tag}}</label>
-            <input type="number" name={{form.mobileNo.name}} required class="form-control" id="{{form.mobileNo.id_for_label}}">
+            <label for= {{ form.phone_number.label_id}} >{{form.phone_number.label_tag}}</label>
+            <input type="number" name={{form.phone_number.name}} required class="form-control" id="{{form.phone_number.id_for_label}}">
           </div>
-          {% if form.errors.mobileNo %}
-          <para style="color:red">{{form.errors.mobileNo}}</para>
+          {% if form.errors.phone_no %}
+          <para style="color:red">{{form.errors.phone_no}}</para>
           {% endif %}
 
           <div class="form-group">
@@ -94,9 +102,4 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
- 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+  {% endblock page-content %}

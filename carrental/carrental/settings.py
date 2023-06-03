@@ -53,13 +53,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'carrental.urls'
 
-AUTH_USER_MODEL = 'customer_portal.User'
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    
-]
-
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -134,6 +127,15 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for user and customer auth
+#AUTH_USER_MODEL = 'customer_portal.User'
+AUTHENTICATION_BACKENDS = [
+    'customer_portal.backends.CustomerAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    
+]
+
 
 
 #email
