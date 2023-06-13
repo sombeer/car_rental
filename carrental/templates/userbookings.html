@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/bootstrap-icons.min.css" integrity="sha512-xvmwlh7gOQ9tfE8Ch9iHf2SrnG7rM7Tp4FnstCipzrzW16U/eHc4T2c8mU+f1GkW/VgtqHMEhpxAA9wptM1nNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!--=============== FAVICON ===============-->
+        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+        <!--=============== REMIX ICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        <!--=============== SWIPER CSS ===============-->
+        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+        <!-- Include Flatpickr CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+         
+        <script src="js/script.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/bootstrap-icons.min.css" integrity="sha512-xvmwlh7gOQ9tfE8Ch9iHf2SrnG7rM7Tp4FnstCipzrzW16U/eHc4T2c8mU+f1GkW/VgtqHMEhpxAA9wptM1nNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+       
+  <style>
+
+    /* CSS styles */
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    /* Media query for smaller screens */
+
+    @media screen and (max-width: 600px) {
+      table {
+        font-size: 14px;
+      }
+    }
+  </style>
+
+  
+  <!-- Link to your JavaScript file -->
+
+  <script src="assets/js/script.js"></script>
+
+</head>
+
+<body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="index.html" class="nav__logo">
+                    <i class="ri-steering-line"></i>
+                    Hill Drive
+                </a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link">Home</a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="#about" class="nav__link">About</a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="contact.html" class="nav__link">Contact</a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="cars.html" class="nav__link">Cars</a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="login.html" class="nav__link">Login</a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="register.html" class="nav__link">Register</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="nav__close" id="nav-close">
+                        <i class="ri-close-line"></i>
+                    </div>
+                </div>
+
+                <!-- Toggle button -->
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </nav>
+        </header>
+        <section class="offer section"></section>
+        
+        <h1>User Booking History and Current Bookings</h1>
+
+        <h2>Booking History</h2>
+        <table id="booking-history-table">
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Car</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table rows will be populated dynamically -->
+          </tbody>
+        </table>
+      
+        <h2>Current Bookings</h2>
+        <table id="current-bookings-table">
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Car</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table rows will be populated dynamically -->
+          </tbody>
+        </table>
+      
+        <!-- Optional: Add a button or link to go back to the main page -->
+        <a href="index.html">Go back</a>
+
+           <!--==================== FOOTER ====================-->
+           <footer class="footer section">
+            <div class="shape shape__big"></div>
+            <div class="shape shape__small"></div>
+
+            <div class="footer__container container grid">
+                <div class="footer__content">
+                    <a href="#" class="footer__logo">
+                        <i class="ri-steering-line"></i> Hill Drive
+                    </a>
+                    <p class="footer__description">
+                        We offer the best self drive cars of <br> 
+                        the most recognized brands in <br> 
+                        India.
+                    </p>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">
+                        Company
+                    </h3>
+
+                    <ul class="footer__links">
+                        <li>
+                            <a href="About.html" class="footer__link">About</a>    
+                        </li>
+                        <li>
+                            <a href="cars.html" class="footer__link">Cars</a>
+                        </li>
+                        
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">
+                        Information
+                    </h3>
+
+                    <ul class="footer__links">
+                        <li>
+                            <a href="T&C.html" class="footer__link">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a href="privacypolicy.html" class="footer__link">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="footer__link">Contact us</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">
+                        Follow us
+                    </h3>
+
+                    <ul class="footer__social">
+                        <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                            <i class="ri-twitter-line"></i>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <span class="footer__copy">
+                &#169; 2023 Hill Drive. All rigths reserved
+            </span>
+        </footer>
+
+
+        <!--========== SCROLL UP ==========-->
+        <a href="#" class="scrollup" id="scroll-up">
+            <i class="ri-arrow-up-line"></i>
+        </a>
+
+
+        <script>
+         
+        </script>
+        <!--=============== SCROLL REVEAL ===============-->
+        <script src="assets/js/scrollreveal.min.js"></script>
+
+        <!--=============== SWIPER JS ===============-->
+        <script src="assets/js/swiper-bundle.min.js"></script>
+
+        <!--=============== MIXITUP JS ===============-->
+        <script src="assets/js/mixitup.min.js"></script>
+
+        <!--=============== MAIN JS ===============-->
+        <script src="assets/js/main.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker@latest"></script>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+</body>
+    
+</html>
+    

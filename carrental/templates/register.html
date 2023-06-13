@@ -1,0 +1,83 @@
+
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block page-content %}
+{% load static %}
+
+{% block style %}
+<style>
+  body {
+  background: rgb(0,0,0);
+background: linear-gradient(218deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9079229103750875) 62%, rgba(0,0,0,0.325289857153799) 100%);
+}
+
+.registration-container {
+background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0);
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.registration-container h2 {
+text-align: center;
+margin-bottom: 20px;
+}
+
+#registrationForm input[type="text"],
+#registrationForm input[type="tel"],
+#registrationForm input[type="email"],
+#registrationForm input[type="password"],
+#registrationForm input[type="file"] {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #cccccc00;
+border-radius: 4px;
+}
+
+#registrationForm input[type="submit"] {
+background-color: #007bff;
+color: #fff;
+cursor: pointer;
+border: none;
+padding: 12px;
+border-radius: 4px;
+width: 100%;
+}
+
+#registrationForm input[type="submit"]:hover {
+background-color: #0056b3;
+}
+
+#registrationForm label {
+display: block;
+margin-bottom: 10px;
+}
+
+
+  </style>
+
+{% endblock style %}
+       <!---================Reg Form====================-->
+       <section class="offer section">
+        <div class="registration-container">
+            <h2>Registration</h2>
+            <form id="registrationForm">
+              <input type="text" id="username" placeholder="Username" required>
+              <input type="text" id="firstName" placeholder="First Name" required>
+              <input type="text" id="lastName" placeholder="Last Name" required>
+              <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+              <input type="email" id="email" placeholder="Email" required>
+              <input type="password" id="password" placeholder="Password" required>
+              <input type="file" id="drivingLicense" accept=".pdf,.jpg,.png" required>
+              <label for="drivingLicense">Upload Driving License</label>
+              <input type="submit" value="Register">
+            </form>
+          </div>
+          
+
+{% endblock page-content %}

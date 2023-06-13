@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Process Form Data</title>
+  <!-- Add the necessary CSS and JS links here -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+</head>
+
+
+<body>
+    <div id="form-data-container"></div>
+  
+    <script>
+      // Retrieve stored form data from sessionStorage
+      var storedData = sessionStorage.getItem('formData');
+  
+      // Check if form data exists
+      if (storedData) {
+        var formData = JSON.parse(storedData);
+  
+        // Access the form data values
+        var pickupDate = formData.pickupDate;
+        var pickupTime = formData.pickupTime;
+        var dropoffDate = formData.dropoffDate;
+        var dropoffTime = formData.dropoffTime;
+  
+        // Display the form data
+        var formContainer = document.getElementById('form-data-container');
+        formContainer.innerHTML += '<p>Pickup Date: ' + pickupDate + '</p>';
+        formContainer.innerHTML += '<p>Pickup Time: ' + pickupTime + '</p>';
+        formContainer.innerHTML += '<p>Drop-off Date: ' + dropoffDate + '</p>';
+        formContainer.innerHTML += '<p>Drop-off Time: ' + dropoffTime + '</p>';
+  
+        // Clear the stored form data from sessionStorage
+        sessionStorage.removeItem('formData');
+      }
+    </script>
+  </body>
+  
+  </html>

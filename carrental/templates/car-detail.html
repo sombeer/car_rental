@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block page-content %}
+{% load static %}
+{% block style %}
+
+<style>
+  .car-detail__content {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .car-detail__left {
+      flex: 0 0 100%;
+      max-width: 600px;
+      margin-right: 20px;
+  }
+
+  .car-detail__left img {
+      width: 100%;
+      height: auto;
+  }
+
+  .car-detail__right {
+      flex: 1 1 auto;
+      margin-bottom: 20px;
+  }
+
+  .info {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 20px;
+  }
+
+  .info-section {
+      flex-basis: calc(50% - 10px);
+      padding-left: 10px; /* Adjust the width as needed */
+  }
+
+  @media (max-width: 768px) {
+      .car-detail__content {
+          flex-direction: column;
+      }
+
+      .car-detail__left {
+          margin-right: 0;
+          margin-bottom: 20px;
+      }
+
+      .info {
+          flex-direction: column;
+          padding-left: 0;
+      }
+
+      .info-section {
+          flex-basis: 100%;
+          margin-bottom: 20px;
+      }
+  }
+  .book-now-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.book-now-button:hover {
+    background-color: #45a049;
+}
+</style>
+{% endblock style %}
+
+
+<section class="home section" id="home"></section>
+<form method="post" action="" enctype="multipart/form-data">
+<section class="car-detail">
+  <div class="container">
+     
+      <div class="car-detail__content">
+          <div class="car-detail__left">
+              <img src="{% static car.image.url %}" alt="{{ car.model }}" id="car-image">
+          </div>
+          <div class="car-detail__right">
+
+              <h2 class="car-detail__title" id="car-title">{{ car.model }} {{ car.name }}</h2>
+              <h4>Booking Information</h4>
+          <div class="pickup-date">
+              <label for="pickup-date">Pickup Date:  {{ pickup_date|date:"F d, Y" }}</label>
+            
+          </div>
+          <div class="drop-date">
+              <label for="drop-date">Drop Date:</label>
+              <input type="text" id="drop-date" name="drop-date" value="{{ return_date|date:"F d, Y" }}" >
+          </div>
+          <div class="hours">
+              <label for="hours">Hours:</label>
+              <input type="text" id="hours" name="hours" value="{{car.hours}}">
+          </div>
+          <div class="free-km-package">
+              <label for="free-km-package">Free KM Package:</label>
+              <input type="text" id="free-km-package" name="free-km-package">
+          </div>
+              <p class="car-detail__description" id="car-description">
+                  <i class="ri-team-line"></i> 7 Seats
+                  <br>
+                  <i class="ri-gas-station-line"></i> {{ car.fuel_type }}
+                  <br>
+                  <i class="ri-steering-line"></i> {{ car.transmission_type }}
+                  <br>
+                  <i class="ri-charging-pile-2-line"></i> 52ltr Tank
+              </p>
+              <ul class="car-detail__specs" id="car-specs">
+                  <!-- Specifications will be dynamically added here -->
+              </ul>
+              <div class="car-detail__price" id="car-price">
+                  Base Package: {{ car.rental_price }}/day
+              </div>
+              <div class="car-detail__booking-form">
+                  
+                      {% csrf_token %}
+                      <input type="hidden" name="car_id" value="{{ car.id }}">
+                      <input type="hidden" name="package" value="base">
+                      
+                  <input type="submit" value="Book">
+              </div>
+          </div>
+      </div>
+     
+  </div>
+</section>
+</form>
+
+<section class="info">
+  <div class="info-section">
+      <h4>INCLUDED</h4>
+      <ul>
+          <li>VEHICLE INSURANCE (USER+3RD PARTY)</li>
+          <li>TOEING AND IMPOUNDING (CAUSED BY VEHICLE FAILURE)</li>
+          <li>MAINTENANCE AND CLEANING</li>
+          <li>24X7 SUPPORT SERVICE</li>
+      </ul>
+  </div>
+  <div class="info-section">
+      <h4>EXCLUDED</h4>
+      <ul>
+          <li>FUEL</li>
+          <li>PARKING</li>
+          <li>STATE AND TOLL TAXES</li>
+          <li>TRAFFIC VIOLATIONS AND PENALTIES</li>
+          <li>TOEING AND IMPOUNDING (CAUSED BY MEMBER FAILURE)</li>
+      </ul>
+  </div>
+</section>
+
+
+{% endblock page-content %}

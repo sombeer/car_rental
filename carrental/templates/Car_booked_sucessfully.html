@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--=============== FAVICON ===============-->
+        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+        <!--=============== REMIX ICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        <!--=============== SWIPER CSS ===============-->
+        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <style>
+        body {
+        background: rgb(0,0,0);
+background: linear-gradient(218deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9079229103750875) 62%, rgba(0,0,0,0.325289857153799) 100%);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .car-details {
+      flex-basis: 60%;
+    }
+    
+    .car-details img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .bill-details {
+      flex-basis: 35%;
+      padding-left: 20px;
+    }
+    
+    .bill {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .bill-heading {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .receipt-number {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+  </style>
+  <title>Booking Successfully</title>
+</head>
+
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <i class="ri-steering-line"></i>
+                Hill Drive
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link ">Home</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="About.html" class="nav__link ">About</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="contact.html" class="nav__link">Contact</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="cars.html" class="nav__link">Cars</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="login.html" class="nav__link">Login</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="register.html" class="nav__link">Register</a>
+                    </li>
+
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+<section = class="offer section">
+  <h1>Car Booked Successfully</h1>
+<br>
+<div class="container">
+
+    <div class="car-details">
+
+      <img src="car-image.jpg" alt="Car Image">
+
+      <h2>Car Details</h2>
+
+      <p>Make: <strong id="car-make"></strong></p>
+
+      <p>Model: <strong id="car-model"></strong></p>
+
+      <p>Year: <strong id="car-year"></strong></p>
+
+      <p>Color: <strong id="car-color"></strong></p>
+
+      <p>License Plate: <strong id="license-plate"></strong></p>
+
+    </div>
+
+
+   <div class="bill-details">
+      <div class="bill">
+        <h2 class="bill-heading">Payment Details</h2>
+        <p>Amount Paid: <strong id="amount-paid"></strong></p>
+      </div>
+      
+      <div class="bill">
+        <h2 class="bill-heading">Bill Details</h2>
+        <p>Bill Date: <strong id="bill-date"></strong></p>
+        <p>Bill Number: <strong id="bill-number"></strong></p>
+      </div>
+      
+      <div class="receipt-number">
+        <p>Receipt Number: <strong id="receipt-number"></strong></p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Fetch data and populate details
+    const carDetails = {
+      make: 'Car Make',
+      model: 'Car Model',
+      year: 'Car Year',
+      color: 'Car Color',
+      licensePlate: 'License Plate Number'
+    };
+
+    const paymentDetails = {
+      amountPaid: '$XX,XXX.XX'
+    };
+
+    const billDetails = {
+      billDate: 'June 3, 2023',
+      billNumber: '123456789'
+    };
+
+    const receiptNumber = '987654321';
+
+    document.getElementById('car-make').textContent = carDetails.make;
+    document.getElementById('car-model').textContent = carDetails.model;
+    document.getElementById('car-year').textContent = carDetails.year;
+    document.getElementById('car-color').textContent = carDetails.color;
+    document.getElementById('license-plate').textContent = carDetails.licensePlate;
+
+    document.getElementById('amount-paid').textContent = paymentDetails.amountPaid;
+
+    document.getElementById('bill-date').textContent = billDetails.billDate;
+    document.getElementById('bill-number').textContent = billDetails.billNumber;
+
+    document.getElementById('receipt-number').textContent = receiptNumber;
+  </script>
+  <footer class="footer section">
+    <div class="shape shape__big"></div>
+    <div class="shape shape__small"></div>
+
+    <div class="footer__container container grid">
+        <div class="footer__content">
+            <a href="#" class="footer__logo">
+                <i class="ri-steering-line"></i> Hill Drive
+            </a>
+            <p class="footer__description">
+                We offer the best self drive cars of <br> 
+                the most recognized brands in <br> 
+                India.
+            </p>
+        </div>
+
+        <div class="footer__content">
+            <h3 class="footer__title">
+                Company
+            </h3>
+
+            <ul class="footer__links">
+                <li>
+                    <a href="About.html" class="footer__link">About</a>    
+                </li>
+                <li>
+                    <a href="cars.html" class="footer__link">Cars</a>
+                </li>
+                
+        </div>
+
+        <div class="footer__content">
+            <h3 class="footer__title">
+                Information
+            </h3>
+
+            <ul class="footer__links">
+                <li>
+                    <a href="T&C.html" class="footer__link">Terms & Conditions</a>
+                </li>
+                <li>
+                    <a href="privacypolicy.html" class="footer__link">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="contact.html" class="footer__link">Contact us</a>
+                </li>
+               
+            </ul>
+        </div>
+
+        <div class="footer__content">
+            <h3 class="footer__title">
+                Follow us
+            </h3>
+
+            <ul class="footer__social">
+                <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                    <i class="ri-facebook-fill"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                    <i class="ri-instagram-line"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                    <i class="ri-twitter-line"></i>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <span class="footer__copy">
+        &#169; 2023 Hill Drive. All rigths reserved
+    </span>
+</footer>
+
+
+<!--========== SCROLL UP ==========-->
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line"></i>
+</a>
+
+<!--=============== SCROLL REVEAL ===============-->
+<script src="assets/js/scrollreveal.min.js"></script>
+
+<!--=============== SWIPER JS ===============-->
+<script src="assets/js/swiper-bundle.min.js"></script>
+
+<!--=============== MIXITUP JS ===============-->
+<script src="assets/js/mixitup.min.js"></script>
+
+<!--=============== MAIN JS ===============-->
+<script src="assets/js/main.js"></script>
+</body>
+</html>

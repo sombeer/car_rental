@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration Form</title>
+</head>
+<body>
+  <h2>VERIFY OTP</h2>
+  {% if error_message %}
+  <p style="color:red">{{ error_message }}</p>
+    {% endif %}
+  <form  method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="otp">Otp:</label>
+    <input type="number" id="otp" name="otp" required><br><br>
+     
+    <input type="submit" value="VERIFY OTP">
+  </form>
+
+  
+</body>
+</html>

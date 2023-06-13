@@ -1,0 +1,82 @@
+ /* Form Styles */
+ .booking_form__container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .booking_form__card {
+    background-color: #343a4028;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .booking_form__card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .booking_form__home-search {
+    margin-top: 20px;
+  }
+
+  .booking_form__form-group {
+    margin-bottom: 20px;
+  }
+
+  .booking_form__form-group label {
+    font-weight: bold;
+  }
+
+  .booking_form__main-select,
+  .booking_form__form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #343a40;
+    color: #4d4d4d;
+    border-radius: 5px;
+  }
+
+  .booking_form__main-select {
+    appearance: none;
+  }
+
+  .booking_form__form-group input[type="text"]::placeholder {
+    color: #a0a0a0;
+  }
+
+  .booking_form__form-group .home__button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Mobile-friendly Styles */
+  @media (max-width: 768px) {
+    .booking_form__container {
+      max-width: 100%;
+      padding: 10px;
+    }
+
+    .booking_form__card {
+      padding: 10px;
+    }
+
+    .booking_form__form-group {
+      margin-bottom: 10px;
+    }
+
+    .booking_form__main-select,
+    .booking_form__form-group input[type="text"] {
+      padding: 8px;
+    }
+
+    .booking_form__form-group .home__button {
+      padding: 8px;
+    }
+  }

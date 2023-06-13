@@ -1,90 +1,137 @@
 {% extends 'base.html' %}
+
 {% block title %}{% endblock title %}
- {% block page-content %}
- {% load static %}
 
+{% block page-content %}
+{% load static %}
 
+{% block style %}
+<style>  
+    body {
+      background: rgb(0, 0, 0);
+      background: linear-gradient(
+        218deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.9079229103750875) 62%,
+        rgba(0, 0, 0, 0.325289857153799) 100%
+      );
+    }
+    
+    .contact-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .contact-form {
+      background-color: transparent;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(131, 131, 131, 0.164);
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .contact-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #cccccc00;
+      border-radius: 4px;
+    }
+    
+    .contact-form input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      width: 100%;
+    }
+    
+    .contact-form input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    
+    .contact-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .contact-details {
+      width: 40%;
+    }
+    
+    .contact-details h2 {
+      margin-bottom: 20px;
+    }
+    
+    .contact-details p {
+      margin-bottom: 10px;
+    }
+    
+    .contact-details a {
+      color: #4caf50;
+    }
+    
+    
+    .map-container {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+    }
+            </style>
+{% endblock style %}
 
-  <!--hero-->
-  <section class="home__image">
-    <div class="hero_page">
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-          <div class="image-overlay">
-            <h1 class="animate__animated animate__fadeInDown">Contact Us</h1>
-            <p class="animate__animated animate__fadeInUp">Feel free to ask your queries</p>
-          </div>
-        </div>
-      </div>
-      <div class="slideshow">
-        <div class="slide active">
-          <img src="{% static 'images/c (1).jpg'%}" alt="Slide Image 1">
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/c (2).jpg'%}" alt="Slide Image 2">
-        </div>
-        <div class="slide">
-          <img src="{% static 'images/c (3).jpg'%}" alt="Slide Image 3">
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- CONTENT -->
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card card-animate">
-          <div class="card-body">
-            <h5 class="card-title">Email Address</h5>
-            <p class="card-text">
-                <a href="mailto:hilldrive.in@gmail.com">hilldrive.in@gmail.com</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card card-animate">
-          <div class="card-body">
-            <h5 class="card-title">Contact Number</h5>
-            <p class="card-text">
-                <a href="tel:+91-8829952535">+91-8829952535</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card card-animate">
-          <div class="card-body">
-            <h5 class="card-title">Address</h5>
-            <p class="card-text">
-                <a href="https://www.google.com/maps?q=Hill+drive,+PWD+parking,+Gulab+Bagh,+Udaipur,+Rajasthan">Hill drive, PWD parking, Gulab Bagh, Udaipur, Rajasthan</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--map-->
+</nav>
+</header>
+<br>
+<section class="offer section">
+<div class="contact-container">
+<div class="contact-form">
+<h2>Contact Us</h2>
+<form action="submit_form.php" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
 
-  <div class="map-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5131.264128911923!2d73.69002519025292!3d24.577057085418655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e54720f82b75%3A0x8c480bd67e4c1d39!2sHill%20Drive!5e0!3m2!1sen!2sin!4v1685429356842!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
 
-   
-<!-- jQuery -->
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" required></textarea><br>
+
+    <input type="submit" value="Submit">
+</form>
+</div>
+
+<div class="contact-details">
+<h2>Contact Details</h2>
+<p>For inquiries, please contact:</p>
+<p><a href="tel:+91-8829952535">Helpline Number: +91-8829952535</a></p>
+<p><a href="hilldrive.in@gmail.com">Email: hilldrive.in@gmail.com</a></p>
+</div>
+</div>
+</section>
+<!--map-->
+
+<div class="map-container">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5131.264128911923!2d73.69002519025292!3d24.577057085418655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e54720f82b75%3A0x8c480bd67e4c1d39!2sHill%20Drive!5e0!3m2!1sen!2sin!4v1685429356842!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  </div>
 
 {% endblock page-content %}
-
-{% block script %}
-    <script>
-    $(window).scroll(function() {
-      $('.card').each(function() {
-        var position = $(this).offset().top;
-        var scrollPosition = $(window).scrollTop() + $(window).height();
-        if (scrollPosition > position) {
-          $(this).addClass('card-animate');
-        }
-      });
-    });
-  </script>
-  {% endblock script %}

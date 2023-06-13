@@ -1,32 +1,85 @@
+
 {% extends 'base.html' %}
+
 {% block title %}{% endblock title %}
+
 {% block page-content %}
-  <div class="container">
-    <br>
-    <H1>Welcome to Hill Drive</H1>
-    <br>
-    <h2>Login to continue</h2>
-    <br>
-  </div>
-  <!--form-->
-  <div class="form-container">
-    <a class="navbar-brand" href="index.html">HILL<span>DRIVE</span></a>
-    <h2>Login</h2>
+{% load static %}
+{% block style %}
+ <style>
+    body {
+        background: rgb(0,0,0);
+background: linear-gradient(218deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9079229103750875) 62%, rgba(0,0,0,0.325289857153799) 100%);
+    }
+/* Rest of the CSS code for the page */
 
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
+    .form-container {
+        background-color: #ffffff00;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0);
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      #loginForm input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #cccccc00;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      
+      #loginForm input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
 
-    <form method="post" enctype="multipart/form-data" >
-      {% csrf_token %}
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" placeholder="Username" required><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="Password" required><br><br>
-      <input type="submit" value="Login">
-  </form>
-  <div class="register-link">
-      New user? <a href="/register">Register here</a>
-  </div>
-  </div>
-  {% endblock page-content %}
+      #loginForm input[type="submit"]:hover {
+        background-color: #019208;
+        color: #fff;
+        cursor: pointer;
+     }
+
+      
+      .register-link {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .ForgetPassword-link{
+        text-align: center;
+        margin-top: 10px;
+    
+      }
+      </style>
+
+{% endblock style %}
+ 
+
+ <!--==========================Login===========================-->
+ <section class="offer section">
+    <div class="form-container">
+<h2>Login</h2>
+<form id="loginForm">
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <input type="submit" value="Login">
+</form>
+<div class="register-link">
+  New user? <a href="register.html">Register here</a>
+</div>
+<div class="ForgetPassword-link">
+  <a href="VerifyUser.html" style="color: rgb(255, 255, 255)";>Forgot Password</a>
+</div>
+</div>
+
+{% endblock page-content %}

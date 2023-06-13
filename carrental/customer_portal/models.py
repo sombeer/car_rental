@@ -40,6 +40,7 @@ class Vehicle(models.Model):
     fuel_type = models.CharField(max_length=50,null=False,blank=False)
     transmission_type = models.CharField(max_length=50 ,null=False)
     rental_price = models.DecimalField(max_digits=8, decimal_places=2,null=False,blank=False)
+    
     image = models.ImageField(upload_to='car_images' ,null=False,blank=False)
 
   

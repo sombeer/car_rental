@@ -1,163 +1,440 @@
   {% extends 'base.html' %}
 
-  {% block title %}Hill Drive- self drive car rental service{% endblock title %}
+  {% block title %}{% endblock title %}
+
   {% block page-content %}
-{% load static %}
-  <!-- HOME SECTION -->
-  <section class="home__image">
-    <div class="hero_page">
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-        </div>
-      </div>
-      <div class="slideshow">
-        <div class="slide active">
-          <img src= " {% static 'images/bg-1.jpg' %}" alt="Slide Image 1">
-        </div>
-        <div class="slide">
-          <img src= " {% static 'images/bg-2.jpg' %}" alt="Slide Image 2">
-        </div>
-        <div class="slide">
-          <img src= " {% static 'images/bg-3.jpg' %}" alt="Slide Image 3">
-        </div>
-        <div class="slide">
-          <img src= " {% static 'images/bg-4.jpg' %}" alt="Slide Image 4">
-        </div>
-      </div>
-    </div>
-  </section>
+  {% load static %}
+{% block style %}
+ <!-- CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+ <!--Custom Css For BookIngForm-->
+  <style>
+    /* Form Styles */
+  .booking_form__container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
 
-  <!-- BOOKING SELECTOR -->
-  <div class="image-overlay"> 
-      <h1 class="animate__animated animate__fadeInDown">Welcome to Hill drive</h1>          
-      <p class="animate__animated animate__fadeInUp"><b>Rent a car for your next adventure</b></p>   
-    <form class="home__search" action="shop.html">
-      <div class="home__group">
-        <label for="search1">City</label>
-        <select class="main__select" name="city_id">
-          <option value="4">UDAIPUR</option>
-        </select>
-      </div>
-      <div class="home__group" style="flex:1">
-        <label for="search2">Choose Pickup & Drop-Off Date</label>
-        <input type="text" autocomplete="off" name="datetimes" placeholder="Enter Pickup and Drop date" required />
-        <input type="hidden" name="pdate">
-        <input type="hidden" name="ddate">
-      </div>
-      <button type="submit"><span>Search</span></button>
-    </form>
+  .booking_form__card {
+    background-color: #343a4028;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .booking_form__card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .booking_form__home-search {
+    margin-top: 20px;
+  }
+
+  .booking_form__form-group {
+    margin-bottom: 20px;
+  }
+
+  .booking_form__form-group label {
+    font-weight: bold;
+  }
+
+  .booking_form__main-select,
+  .booking_form__form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #343a40;
+    color: #ffffff;
+    border-radius: 5px;
+  }
+
+  .booking_form__main-select {
+    appearance: none;
+  }
+
+  .booking_form__form-group input[type="text"]::placeholder {
+    color: #a0a0a0;
+  }
+
+  .booking_form__form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .button-style {
+   background-color: #007bff;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+  }
+
+  /* Mobile-friendly Styles */
+  @media (max-width: 768px) {
+    .booking_form__container {
+      max-width: 100%;
+      padding: 10px;
+    }
+
+    .booking_form__card {
+      padding: 10px;
+    }
+
+    .booking_form__form-group {
+      margin-bottom: 10px;
+    }
+
+    .booking_form__main-select,
+    .booking_form__form-group input[type="text"] {
+      padding: 8px;
+    }
+
+    .booking_form__form-group button {
+      padding: 8px;
+    }
+  }
+</style>
+
+{% endblock style %}
+
+  <!--==================== MAIN ====================-->
+   <main class="main">
+    <!--==================== HOME ====================-->
+    <section class="home section" id="home">
+        <div class="shape shape__big"></div>
+        <div class="shape shape__small"></div>
+
+        <div class="home__container container grid">
+            <div class="home__data">
+                <h1 class="home__title">
+                        Welcome To Hill-Drive
+                </h1>
+
+                    <h2 class="home__subtitle">
+                        Choose The Best For You
+                    </h2>
+
+                    <h3 class="home__elec">
+                        <i class="ri-arrow-down-s-fill"></i> 
+                    </h3>
+                </div>
+
+                <img src="{% static 'img/home.png'%}" alt="" class="home__img">
+        </section>
+            <!-- BOOKING SELECTOR -->
+            <form method="get" action="/cars/" enctype="multipart/form-data">
+              {% csrf_token %}
+              <section>
+                <div class="booking_form__container">
+          
+                  <div class="booking_form__card">
+          
+                    <div class="booking_form__card-body">
+          
+                      <div class="booking_form__home-search">
+          
+                       
+                        <div class="booking_form__form-group">
+          
+                          <label for="booking_form__search1">City</label>
+          
+                          <select class="booking_form__main-select" name="city_id">
+          
+                            <option value="4">UDAIPUR</option>
+          
+                          </select>
+          
+                        </div>
+          
+                        <div class="booking_form__form-group">
+          
+                          <label for="pickup_date">Choose Pickup Date</label>
+          
+                          <div class="input-group date">
+          
+                            <input type="text" name="pickup_date" id="pickup_date" autocomplete="off" placeholder="Enter Pickup Date" required>
+          
+                            <span class="input-group-addon">
+          
+                              <span class="glyphicon glyphicon-calendar"></span>
+          
+                            </span>
+          
+                          </div>
+          
+                        </div>
+          
+                        <div class="booking_form__form-group">
+          
+                          <label for="pickup_time">Choose Pickup Time</label>
+          
+                          <div class="input-group date">
+          
+                            <input type="text" name="pickup_time" id="pickup_time" autocomplete="off" placeholder="Enter Pickup Time" required>
+          
+                            <span class="input-group-addon">
+          
+                              <span class="glyphicon glyphicon-time"></span>
+          
+                            </span>
+          
+                          </div>
+          
+                        </div>
+          
+                        <div class="booking_form__form-group">
+          
+                          <label for="dropoff_date">Choose Drop-Off Date</label>
+          
+                          <div class="input-group date">
+          
+                            <input type="text" name="dropoff_date" id="dropoff_date" autocomplete="off" placeholder="Enter Drop-Off Date" required>
+          
+                            <span class="input-group-addon">
+          
+                              <span class="glyphicon glyphicon-calendar"></span>
+          
+                            </span>
+          
+                          </div>
+          
+                        </div>
+          
+                        <div class="booking_form__form-group">
+          
+                          <label for="dropoff_time">Choose Drop-Off Time</label>
+          
+                          <div class="input-group date">
+          
+                            <input type="text" name="dropoff_time" id="dropoff_time" autocomplete="off" placeholder="Enter Drop-Off Time" required>
+          
+                            <span class="input-group-addon">
+          
+                              <span class="glyphicon glyphicon-time"></span>
+          
+                            </span>
+          
+                          </div>
+          
+                        </div>
+          
+                        <input type="hidden" name="pdate" value="07-06-2023 11:00 PM">
+          
+                        <input type="hidden" name="ddate" value="08-06-2023 10:00 PM">
+          
+                        <button type="submit" class="button-style" onclick="validateForm()"><span>Search</span></button>
+          
+                      </div>
+          
+                    </div>
+          
+                  </div>
+          
+                </div>
+          
+              </section>
+          
+            </form>
+             
+       
+
+
+        <!--==================== POPULAR ====================-->
+        <section class="popular section" id="popular">
+          <h2 class="section__title">
+              Choose Your Car <br> From Various Brands
+          </h2>
+          <div class="popular__containers">
+
+
+                  <article class="popular__card swiper-slide">
+                      <div class="shape shape__smaller"></div>
+      
+                      <h1 class="popular__title">Maruti</h1>
+                      <h3 class="popular__subtitle">Baleno (P)</h3>
+      
+                      <img src="{% static 'car_app/img/popular1.png' %}" alt="" class="popular__img">
+      
+                      <div class="popular__data">
+                          <div class="popular__data-group">
+                              <i class="ri-team-line"></i> 5 Seats
+                          </div>
+                          <div class="popular__data-group">
+                              <i class="ri-gas-station-line"></i> Petrol
+                          </div>
+                          <div class="popular__data-group">
+                              <i class="ri-steering-line"></i> Manual
+                          </div>
+                          <div class="popular__data-group">
+                              <i class="ri-charging-pile-2-line"></i> 42ltr Tank
+                          </div>
+                      </div>
+      
+                      <h3 class="popular__price">₹2600/Day</h3>
+      
+                      <button class="button popular__button">
+                          <i class="ri-shopping-bag-2-line"></i>
+                      </button>
+                  </article>
+      
+                 
+      
+  
     
-    <div id="popup" class="popup">
-      <p>Minimum booking duration is 12 hours.</p>
-    </div>
-  </div> 
 
- <!--CAR DISPLAY SECTION-->
+              </div>
+          </div>
+      </section>
+       
 
-<section class="ftco-section ftco-no-pt bg-light">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-        <span class="subheading"><h3>What We Offer</h3></span>
-        <h2 class="mb-2">Featured Vehicles</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card rounded ftco-animate">
-          <img class="card-img-top" src="{% static 'images/car-1.jpg' %}" alt="Car Image 1">
-          <div class="card-body">
-            <h5 class="card-title">Scorpio Classic</h5>
-            <p class="card-text">Mahindra</p>
-            <p class="card-price">₹4800/day</p>
-            <div class="button-container">
-              <a href="#" class="btn btn-primary">Book Now</a>
-              <a href="#" class="btn btn-secondary">Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card rounded ftco-animate">
-          <img class="card-img-top" src="{% static 'images/car-2.jpg'%}" alt="Car Image 2">
-          <div class="card-body">
-            <h5 class="card-title">Polo</h5>
-            <p class="card-text">VW</p>
-            <p class="card-price">₹2800/day</p>
-            <div class="button-container">
-              <a href="#" class="btn btn-primary">Book Now</a>
-              <a href="#" class="btn btn-secondary">Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card rounded ftco-animate">
-          <img class="card-img-top" src="{% static '/images/car-3.jpg' %}" alt="Car Image 3">
-          <div class="card-body">
-            <h5 class="card-title">Baleno</h5>
-            <p class="card-text">Suzuki-Nexa</p>
-            <p class="card-price">₹2400/day</p>
-            <div class="button-container">
-              <a href="#" class="btn btn-primary">Book Now</a>
-              <a href="#" class="btn btn-secondary">Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card rounded ftco-animate">
-          <img class="card-img-top" src="{% static 'images/car-5.jpg'%} " alt="Car Image 3">
-          <div class="card-body">
-            <h5 class="card-title">Swift</h5>
-            <p class="card-text">Suzuki</p>
-            <p class="card-price">₹2600/day</p>
-            <div class="button-container">
-              <a href="#" class="btn btn-primary">Book Now</a>
-              <a href="#" class="btn btn-secondary">Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card rounded ftco-animate">
-          <img class="card-img-top" src="{% static 'images/car-4.jpg'%} " alt="Car Image 3">
-          <div class="card-body">
-            <h5 class="card-title">RitZ</h5>
-            <p class="card-text">Maruti</p>
-            <p class="card-price">₹2400/day</p>
-            <div class="button-container">
-              <a href="#" class="btn btn-primary">Book Now</a>
-              <a href="#" class="btn btn-secondary">Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Add more col-md-4 columns for additional vehicles -->
-    </div>
-  </div>
-</section>
- 
- <!--ABOUT US SECTION-->
- 
- <section class="ftco-section ftco-about">
-  <div class="container">
-    <div class="row no-gutters">
-      <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{% static "images/about.jpg" %}');">
-      </div>
-      <div class="col-md-6 wrap-about ftco-animate" style="padding: 10px; margin-top: 10px;">
-        <div class="heading-section heading-section-white pl-md-5">
-          <span class="subheading"><b>About us</b></span>
-          <h2 class="mb-4"><b>Welcome to HILL Drive</b></h2>
+        <!--==================== OFFER ====================-->
+        <section class="offer section">
+            <div class="offer__container container grid">
+                <img src="{% static 'img/offer-bg.png'%}" alt="" class="offer__bg">
 
-          <p>Welcome to Hill Drive, Udaipur's premier self-drive car rental company, established in 2022. With our commitment to excellence and customer satisfaction, we have quickly emerged as the fastest-growing company in the field of car rentals in Rajasthan. 
-      At Hill Drive, we understand the importance of convenience and freedom when it comes to exploring the beautiful city of Udaipur. Our mission is to provide top-notch, hassle-free car rental services that empower our customers to discover the city at their own pace and on their terms.
-      <p>We take immense pride in our diverse fleet of well-maintained, high-quality vehicles, ranging from compact cars to spacious SUVs. Our cars are equipped with state-of-the-art technology and safety features to ensure a comfortable and secure journey for our valued customers. Whether you are a solo traveler, a family on vacation, or a group of friends embarking on an adventure, we have the perfect vehicle to suit your needs.</p>
-          <p><a href="#" class="btn btn-primary">Search Vehicle</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                <div class="offer__data">
+                    <h2 class="section__title offer__title">
+                        Do You Want To Receive <br> Special Offers?
+                    </h2>
 
-{% endblock page-content %}
+                    <p class="offer__description">
+                        Be the first to receive all the information about our 
+                        products and new cars by email by subscribing to our 
+                        mailing list and also get coupon codes and discounts on booking.
+                    </p>
+
+                    <a href="#" class="button">
+                        Subscribe Now
+                    </a>
+                </div>
+
+                <img src="{% static 'img/offer.png'%}" alt="" class="offer__img">
+            </div>
+        </section>
+
+        <!--==================== LOGOS ====================-->
+        <section class="logos section">
+            <div class="logos__container container grid">
+                <div class="logos__content">
+                    <img src="{% static 'img/logo1.png'%}" alt="" class="logos__img">
+                </div>
+                <div class="logos__content">
+                    <img src="{% static 'img/logo2.png'%}" alt="" class="logos__img">
+                </div>
+                <div class="logos__content">
+                    <img src="{% static 'img/logo3.png'%}" alt="" class="logos__img">
+                </div>
+                <div class="logos__content">
+                    <img src="{% static 'img/logo4.png'%}" alt="" class="logos__img">
+                </div>
+                <div class="logos__content">
+                    <img src="{% static 'img/logo5.png'%}" alt="" class="logos__img">
+                </div>
+                <div class="logos__content">
+                    <img src="{% static 'img/logo6.png'%}" alt="" class="logos__img">
+                </div>
+            </div>
+        </section>
+    </main>
+    {% endblock page-content %}
+
+    {% block script %}
+    
+<!-- JavaScript code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Initialize DateTimePicker for pickup date
+    $('#pickup_date').datetimepicker({
+      format: 'YYYY-MM-DD',
+      minDate: new Date(),
+      useCurrent: false
+    });
+
+    // Initialize DateTimePicker for pickup time
+    $('#pickup_time').datetimepicker({
+      format: 'HH:mm',
+      useCurrent: false,
+      stepping: 60
+    });
+
+    // Initialize DateTimePicker for drop-off date
+    $('#dropoff_date').datetimepicker({
+      format: 'YYYY-MM-DD',
+      minDate: new Date(),
+      useCurrent: false
+    });
+
+    // Initialize DateTimePicker for drop-off time
+    $('#dropoff_time').datetimepicker({
+      format: 'HH:mm',
+      useCurrent: false,
+      stepping: 60
+    });
+
+    // Set date and time picker constraints
+    $('#pickup_date').on('dp.change', function(e) {
+      $('#dropoff_date').data('DateTimePicker').minDate(e.date);
+    });
+
+    $('#dropoff_date').on('dp.change', function(e) {
+      $('#pickup_date').data('DateTimePicker').maxDate(e.date);
+    });
+  });
+
+  function validateForm() {
+    // Retrieve form inputs
+    var pickupDate = document.getElementById('pickup_date').value;
+    var pickupTime = document.getElementById('pickup_time').value;
+    var dropoffDate = document.getElementById('dropoff_date').value;
+    var dropoffTime = document.getElementById('dropoff_time').value;
+
+    // Perform validation
+    var isValid = true;
+
+    // Check if all fields are filled
+    if (pickupDate === '' || pickupTime === '' || dropoffDate === '' || dropoffTime === '') {
+      isValid = false;
+      alert('Please fill in all the fields.');
+    }
+
+    // Check if pickup date and time are in the future
+    var now = new Date();
+    var pickupDateTime = new Date(pickupDate + ' ' + pickupTime);
+    if (pickupDateTime <= now) {
+      isValid = false;
+      alert('Please select a future pickup date and time.');
+    }
+
+    // Check if booking tenure is within the allowed range
+    var dropoffDateTime = new Date(dropoffDate + ' ' + dropoffTime);
+    var bookingTenure = (dropoffDateTime - pickupDateTime) / (1000 * 60 * 60); // Calculate booking tenure in hours
+    if (bookingTenure < 12 || bookingTenure > 720) {
+      isValid = false;
+      alert('Booking tenure should be between 12 and 720 hours.');
+    }
+
+    // Store form data in sessionStorage
+    if (isValid) {
+      var formData = {
+        pickupDate: pickupDate,
+        pickupTime: pickupTime,
+        dropoffDate: dropoffDate,
+        dropoffTime: dropoffTime
+      };
+      sessionStorage.setItem('formData', JSON.stringify(formData));
+
+      // Make AJAX request to check car availability
+     
+      // Redirect to the booking page or perform any other necessary action
+    }
+  }
+</script>
+    {% endblock script %}

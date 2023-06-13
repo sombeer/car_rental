@@ -2,15 +2,18 @@ from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import render, redirect,get_object_or_404
 from django.urls import reverse
 from .forms import UserRegistrationForm
-from .models import Customer
+from .models import Customer,Vehicle,RentalBooking
 import random
 from django.core.mail import send_mail
-
+from django.shortcuts import render
+from datetime import datetime, timedelta
+from urllib.parse import unquote
+from django.contrib.auth.decorators import login_required
 
 
 
 def index(request):
-    return render(request,'index.html')
+    return render(request,'index.html',{'cars':cars})
 
 def about(request):
     return render(request,'About.html')
@@ -18,9 +21,63 @@ def about(request):
 def contact(request):
     return render(request,'contact.html')
 
-def shop(request):
-    return render(request,'shop.html')
+from urllib.parse import unquote
 
+def cars(request):
+    # Retrieve the pickup date and return date from the search form
+    #unquote() is used to decode the URL-encoded characters in the date strings. 
+    pickup_date_str = unquote(request.GET.get('pickup_date'))
+    return_date_str = unquote(request.GET.get('return_date'))
+    
+    # Convert the date strings to datetime objects
+    #The date format in strptime() is modified to ' %B %d, %Y' to match the format in the URL parameters.
+    pickup_date = datetime.strptime(pickup_date_str, ' %B %d, %Y').date()
+    return_date = datetime.strptime(return_date_str, ' %B %d, %Y').date()
+    
+    # Query the rental booking model for bookings matching the pickup and return dates
+    bookings = RentalBooking.objects.filter(pickup_date=pickup_date, return_date=return_date)
+    
+    # Fetch all cars from the car model
+    cars = Vehicle.objects.all()
+    
+    # Create a dictionary to store the car status (booked or available)
+    car_status = {}
+    
+    # Iterate over each car and check if it has a booking for the specified dates
+    for car in cars:
+        if bookings.filter(vehicle=car).exists():
+            car_status[car.id] = 'Booked'
+        else:
+            car_status[car.id] = 'Available'
+    
+    # Render the HTML template with the car data, status, pickup_date, and return_date
+    return render(request, 'cars.html', {'cars': cars, 'car_status': car_status, 'pickup_date': pickup_date, 'return_date': return_date})
+
+
+
+def booking(request):
+    id = request.GET.get('car_id')
+    pickup_date_str = request.GET.get('pickup_date')
+    return_date_str = request.GET.get('return_date')
+    
+    # Convert pickup_date_str and return_date_str to datetime objects
+    #strip() to remove any leading or trailing whitespace from the date strings before converting them to datetime objects.
+    pickup_date = datetime.strptime(pickup_date_str, ' %B %d, %Y').date()
+    return_date = datetime.strptime(return_date_str, ' %B %d, %Y').date()    
+    hours = (return_date - pickup_date).total_seconds() // 3600
+
+    car = get_object_or_404(Vehicle, id=id)
+    car.hours = hours
+
+    return render(request, 'car-detail.html', {'car': car, 'pickup_date': pickup_date, 'return_date': return_date})
+
+@login_required
+def user_booking_process(request):
+    car_id=request.GET.get('car_id')
+    current_user = request.user
+    print (current_user.id)
+    car = Vehicle.objects.filter(id=id)
+    return render(request, 'car-detail.html',{'car':car})
 
 
 #register user
@@ -30,13 +87,13 @@ def register(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             if Customer.objects.filter(email=email).exists():
-                return render(request, 'car_rental/register.html', {'form': form, 'error_message': 'Email already exists.'})
+                return render(request, 'register.html', {'form': form, 'error_message': 'Email already exists.'})
             form.save()
             return redirect(reverse('customer_portal:login') )     
     else:
         form = UserRegistrationForm()
 
-    return render(request, 'car_rental/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 #user login

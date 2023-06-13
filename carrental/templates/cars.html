@@ -1,0 +1,197 @@
+
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block page-content %}
+{% load static %}
+{% block style  %}
+<style>
+    .car-models__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  
+  .car-model {
+      width: 300px;
+      padding: 20px;
+      margin: 10px;
+      background: linear-gradient(218deg, rgba(0,0,0,1) 0%, rgba(94,127,145,0.7650657675179446) 37%,rgba(105,104,104,0.325289857153799) 99%);
+      border: 0px solid #ccc;
+      border-radius: 5px;
+  }
+  
+  .car-model__title {
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 15px;
+  }
+  
+  .car-model__image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+  }
+  
+  .car-model__details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding-bottom: 20px; /* Add bottom padding to the container */
+  }
+  
+  .car-model__details p {
+    flex: 0 0 calc(50% - 10px);
+    margin: 0;
+    
+    padding-bottom: 10px; /* Add bottom padding to each list element */
+  }
+  
+  .car-model__package {
+      display: block;
+      margin-top: 10px;
+      padding: 5px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+  }
+/* Style for package buttons */
+.package-button {
+    display: inline-block;
+    padding: 8px 10px;
+    margin-right: 10px; /* Add right margin for space between buttons */
+    margin-bottom: 10px; /* Add bottom margin for vertical separation */
+    font-size: 16px;
+    text-align: center;
+    color:#ccc;
+    background: radial-gradient(circle, rgba(0,0,0,0.4541413977700455) 0%, rgba(255,253,253,0.17122823250393904) 50%, rgba(0,0,0,0.5045615658372724) 100%);
+    border: 0.5px solid #959595;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .package-button:last-child {
+    margin-right: 0; /* Remove right margin for the last button */
+  }
+  
+  .package-button:hover {
+    background-color: #1C85ED;
+  }
+  
+  .package-button:active {
+    background-color: #0454A4;
+  }
+  
+  .package-button[disabled] {
+    background-color: #1C85ED;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+</style>
+{% endblock style  %}
+<section class="home section" id="home">
+    <div class="shape shape__big"></div>
+    <div class="shape shape__small"></div>
+    
+<!--====================--Car Model--=========================-->
+
+<section class="car-models" id="car-models">
+    <h2 class="section__title">Car Models</h2>
+    <div class="car-models__container">
+        <!-- Car models will be dynamically generated here -->
+        {% for car in cars %}
+        <div class="car-model">
+        <form method="get" action="/booking/" enctype="multipart/form-data" >
+                {% csrf_token %}
+            <img class="car-model__image" src="{% static car.image.url %}" alt="{{ car.model }}">
+            <input type="hidden" value=" {{pickup_date}}" name="pickup_date" id="pickup_date">
+            <input type="hidden" value=" {{return_date}}" name="return_date" id="return_date">
+            <input type="hidden" value=" {{pickup_date}}" name="pickup_date" id="pickup_date">
+
+            <h3 class="car-model__title">{{ car.model }} {{ car.name }}</h3>
+            <div class="car-model__details">
+                <p><i class="ri-team-line"></i> 7 Seats</p>
+                <p><i class="ri-gas-station-line"></i> {{ car.fuel_type }}</p>
+                <p><i class="ri-steering-line"></i> {{ car.transmission_type }}</p>
+                <p><i class="ri-charging-pile-2-line"></i> 52ltr Tank</p>
+            </div>
+            
+
+            <div class="car-model__packages">
+
+                <!-- Secondary navbar for package selection -->
+            <input type="hidden" id="car_id" name="car_id" value="{{car.id}}">
+                <ul class="package-navbar">
+            
+                    {% if car_status.car.id == "Booked" %}
+                        <li class="package-navbar__item active" data-package="base">
+            
+                            <button class="package-button" disabled>Booked</button>
+            
+                        </li>
+            
+                    {% else %}
+                    
+                        <li class="package-navbar__item active" data-package="base">
+            
+                            <button class="package-button">Base Package : {{car.rental_price}}/day </button>
+            
+                        </li>
+            
+                        <li class="package-navbar__item" data-package="medium">
+            
+                            <button class="package-button">Medium Package</button>
+            
+                        </li>
+            
+                        <li class="package-navbar__item" data-package="unlimited">
+            
+                            <button class="package-button">Unlimited Package</button>
+            
+                        </li>
+                   
+                    {% endif %}
+                </ul>
+            
+            </div>
+        </form>
+        </div>
+        
+        {% endfor %}
+    </div>
+</section>
+{% block script %}
+<script>
+    $(document).ready(function() {
+        // Set event listener for package selection
+        $('.package-navbar__item').click(function() {
+            // Remove active class from all items
+            $('.package-navbar__item').removeClass('active');
+            
+            // Add active class to the clicked item
+            $(this).addClass('active');
+            
+            // Get the selected package
+            var selectedPackage = $(this).data('package');
+            
+            // Update the displayed data based on the selected package
+            $('.car-model').each(function() {
+                var carModel = $(this);
+                
+                // Hide all packages in the car model
+                carModel.find('.car-model__package').hide();
+                
+                // Show the selected package based on its data-package attribute
+                carModel.find('.car-model__package[data-package="' + selectedPackage + '"]').show();
+            });
+        });
+    });
+</script>
+{% endblock script %}              
+
+    {% endblock page-content %}
