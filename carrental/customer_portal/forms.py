@@ -11,3 +11,4 @@ class UserRegistrationForm(UserCreationForm):
         model = Customer
         fields = ('name','username','email', 'password1', 'password2', 'drivingLicenseNo','phone_number')
 
+        

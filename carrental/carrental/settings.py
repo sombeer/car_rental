@@ -131,8 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # for user and customer auth
 #AUTH_USER_MODEL = 'customer_portal.User'
 AUTHENTICATION_BACKENDS = [
-    'customer_portal.backends.CustomerAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'customer_portal.backends.CustomerAuthenticationBackend',
+    
+    
     
 ]
 
@@ -146,3 +148,17 @@ EMAIL_HOST_USER = 'hilldrive.in@gmail.com'
 EMAIL_HOST_PASSWORD = 'fbhzmzqxfjhgfntt'
 EMAIL_USE_TLS = True
 
+LOGIN_URL = '/login/'
+
+RAZORPAY_API_KEY = 'rzp_test_ndIcE1FtwItuzq'
+RAZORPAY_API_SECRET = 'B0IRLy9ERivWmBKZp2iGMNhp'
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG:'alert-info',
+    messages.INFO:'alert-info',
+    messages.SUCCESS:'alert-success',
+    messages.WARNING:'alert-warning',
+    messages.ERROR:'alert-error',
+}

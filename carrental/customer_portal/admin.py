@@ -43,7 +43,7 @@ class VehicleAdmin(admin.ModelAdmin):
 
 @admin.register(RentalBooking)
 class RentalBookingAdmin(admin.ModelAdmin):
-    list_display = ["user","vehicle","return_location","return_location","pickup_date","return_date","rental_status"]
+    list_display = ["user","vehicle","return_location","return_location","pickup_date","return_date"]
 
 
 @admin.register(RentalTransaction)

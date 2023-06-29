@@ -82,9 +82,10 @@
 
 
 <section class="home section" id="home"></section>
-<form method="post" action="" enctype="multipart/form-data">
-<section class="car-detail">
-  <div class="container">
+<form method="GET" action="/car-booking/" enctype="multipart/form-data">
+    {% csrf_token %}
+    <section class="car-detail">
+    <div class="container">
      
       <div class="car-detail__content">
           <div class="car-detail__left">
@@ -95,8 +96,8 @@
               <h2 class="car-detail__title" id="car-title">{{ car.model }} {{ car.name }}</h2>
               <h4>Booking Information</h4>
           <div class="pickup-date">
-              <label for="pickup-date">Pickup Date:  {{ pickup_date|date:"F d, Y" }}</label>
-            
+              <label for="pickup-date">Pickup Date:  </label>
+              <input type="text" id="pickup_date" name="pickup_date" value="{{ pickup_date|date:"F d, Y" }}" >
           </div>
           <div class="drop-date">
               <label for="drop-date">Drop Date:</label>
@@ -125,19 +126,23 @@
               <div class="car-detail__price" id="car-price">
                   Base Package: {{ car.rental_price }}/day
               </div>
+              <div class="car-detail__price" id="hours_rent">
+                Your Package Rate is : {{ car.hours_rent }}
+            </div>
               <div class="car-detail__booking-form">
                   
-                      {% csrf_token %}
-                      <input type="hidden" name="car_id" value="{{ car.id }}">
-                      <input type="hidden" name="package" value="base">
-                      
-                  <input type="submit" value="Book">
+                <input type="hidden" id="car_id" name="car_id" value="{{car.id}}">
+                <input type="hidden" id="hours_rent" name="hours_rent" value="{{ car.hours_rent }}">
+                <input type="hidden" id="name" name="name" value="{{car.name}}">
+                <input type="hidden" id="model" name="model" value="{{ car.model }}">
+                <input type="hidden" id="fuel_type" name="fuel_type" value="{{ car.fuel_type }}">
+                <input type="submit" value="Book car">
               </div>
           </div>
       </div>
      
-  </div>
-</section>
+    </div>
+    </section>
 </form>
 
 <section class="info">

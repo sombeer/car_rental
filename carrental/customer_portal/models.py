@@ -38,11 +38,17 @@ class Vehicle(models.Model):
     year = models.PositiveIntegerField(blank=True,null=True)
     color = models.CharField(max_length=50,blank=True)
     fuel_type = models.CharField(max_length=50,null=False,blank=False)
+    fuel_capacity = models.PositiveIntegerField(null=False,blank=False,default=0)
     transmission_type = models.CharField(max_length=50 ,null=False)
     rental_price = models.DecimalField(max_digits=8, decimal_places=2,null=False,blank=False)
-    
+    base_package_free_km = models.PositiveIntegerField( null=False,blank=False,default=0)
+    medium_package = models.DecimalField(max_digits=8, decimal_places=2,null=False,blank=False,default=0)
+    medium_package_free_km = models.PositiveIntegerField( null=False,blank=False,default=0)
+    unlimited_package = models.DecimalField(max_digits=8, decimal_places=2,null=False,blank=False,default=0)
+    excess_km_charge=models.PositiveIntegerField(null=False,blank=False,default=0)
     image = models.ImageField(upload_to='car_images' ,null=False,blank=False)
 
+   
   
 
 class RentalBooking(models.Model):
@@ -52,17 +58,26 @@ class RentalBooking(models.Model):
     return_location = models.CharField(max_length=255)
     pickup_date = models.DateField()
     return_date = models.DateField()
-    rental_status = models.CharField(max_length=50)
+    is_booked = models.BooleanField(default=0,null=False)
+    
+    def __str__(self):
+        return str(self.pk) 
 
 class RentalTransaction(models.Model):
     booking = models.ForeignKey(RentalBooking, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=50)
     total_amount = models.DecimalField(max_digits=8, decimal_places=2)
     transaction_status = models.CharField(max_length=50)
-    payment_date = models.DateField()
+    payment_date = models.DateField(auto_now=True)
+    razor_pay_order_id = models.CharField(max_length=100,null=True,blank=True)
+    razor_pay_payment_id = models.CharField(max_length=100,null=True,blank=True)
+    razor_pay_payment_signature = models.CharField(max_length=100,null=True,blank=True)
+    is_paid = models.BooleanField(default=0,null=False)
+    # is_payment_verify=models.BooleanField(default=0,null=False)
+
 
     def __str__(self):
-        return self.booking
+        return str(self.pk) 
 
 class Location(models.Model):
     location_name = models.CharField(max_length=255)

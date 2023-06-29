@@ -1,75 +1,117 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}{% endblock title %}</title>
-        {% load static %}
+  <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>{% block title %}{% endblock title %}</title>
+          {% load static %}
 
-        {% block style %}{% endblock style %}
-        <!--=============== FAVICON ===============-->
-        <link rel="shortcut icon" href="{% static 'img/favicon.png'%}" type="image/x-icon">
+          {% block style %}{% endblock style %}
+          <!--=============== FAVICON ===============-->
+          <link rel="shortcut icon" href="{% static 'img/favicon.png'%}" type="image/x-icon">
 
-        <!--=============== REMIX ICONS ===============-->
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+          <!--=============== REMIX ICONS ===============-->
+          <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-        <!--=============== SWIPER CSS ===============-->
-        <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css'%}">
+          <!--=============== SWIPER CSS ===============-->
+          <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css'%}">
 
-        <!--=============== CSS ===============-->
-        <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+          <!--=============== CSS ===============-->
+          <link rel="stylesheet" href="{% static 'css/styles.css'%}">
 
-        <link rel="stylesheet" href="{% static 'css/Bookingform.css'%}">
-        <!--================Date Picker Css================-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+          <link rel="stylesheet" href="{% static 'css/Bookingform.css'%}">
+          <!--================Date Picker Css================-->
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        
+          <!--================message alert Css================-->
+          <style>
+            .alert {
+              padding: 10px;
+              margin: 10px auto;
+              width: fit-content;
+              text-align: center;
+              border-radius: 5px;
+            }
+            
+            .alert-success {
+              background-color: #dff0d8;
+              color: #3c763d;
+            }
+            
+            .alert-error {
+              background-color: #f2dede;
+              color: #a94442;
+            }
+            
+          </style>
+          
+          <title>Hill Drive - self Drive Car Rental Platform</title>
+      </head>
+      <body>
+          <!--==================== HEADER ====================-->
+          {% include 'header.html' %}
 
 
+          <!-- Content Wrapper. Contains page content -->
+      <!--Alert -->
+      
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert {{ message.tags }} col-md-2 text-center" style="margin: auto" role="alert" id="msg">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
 
-        <title>Hill Drive - self Drive Car Rental Platform</title>
-    </head>
-    <body>
-        <!--==================== HEADER ====================-->
-        {% include 'header.html' %}
+    <!--End Alert-->
+
+              <!--==================== page main content ====================-->
+
+              {% block page-content %}
+              
+              
+              {% endblock page-content %}
+    
+            <!--==================== FOOTER ====================-->
+        {% include 'footer.html' %}
+          <!--========== SCROLL UP ==========-->
+          <a href="#" class="scrollup" id="scroll-up">
+              <i class="ri-arrow-up-line"></i>
+          </a>
+          <!--=============moment .js===============-->
+          <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/moment@latest"></script>
 
 
+          <!--=====================Date Picker======================-->
+          <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/daterangepicker@latest"></script>
 
-             <!--==================== page main content ====================-->
+          <!-- jQuery -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-             {% block page-content %}
-             
-             
-             {% endblock page-content %}
-  
-          <!--==================== FOOTER ====================-->
-       {% include 'footer.html' %}
-        <!--========== SCROLL UP ==========-->
-        <a href="#" class="scrollup" id="scroll-up">
-            <i class="ri-arrow-up-line"></i>
-        </a>
-        <!--=============moment .js===============-->
-        <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/moment@latest"></script>
+          <!--=============== SCROLL REVEAL ===============-->
+          <script src="{% static 'js/scrollreveal.min.js'%}"></script>
 
+          <!--=============== SWIPER JS ===============
+          <script src="{% static 'js/swiper-bundle.min.js'%}"></script> -->
 
-        <!--=====================Date Picker======================-->
-        <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/daterangepicker@latest"></script>
+          <!--=============== MIXITUP JS ===============-->
+          <script src="{% static 'js/mixitup.min.js'%}"></script>
 
-        <!-- jQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+          <!--=============== MAIN JS ===============-->
+          <script src="{% static 'js/main.js'%}"></script>
+          <script>
+            setTimeout(function(){
+              if ($('#msg').length > 0) {
+                $('#msg').remove();
+              }
+            }, 2000)
+          </script> 
+        
+          {% block script %}{% endblock script %}
 
-        <!--=============== SCROLL REVEAL ===============-->
-        <script src="{% static 'js/scrollreveal.min.js'%}"></script>
+        
 
-        <!--=============== SWIPER JS ===============
-        <script src="{% static 'js/swiper-bundle.min.js'%}"></script> -->
-
-        <!--=============== MIXITUP JS ===============-->
-        <script src="{% static 'js/mixitup.min.js'%}"></script>
-
-        <!--=============== MAIN JS ===============-->
-        <script src="{% static 'js/main.js'%}"></script>
-
-        {% block script %}{% endblock script %}
-    </body>
-</html>
+      </body>
+  </html>

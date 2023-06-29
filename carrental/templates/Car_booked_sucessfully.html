@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
 
-        <!--=============== FAVICON ===============-->
-        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+{% block title %}{% endblock title %}
 
-        <!--=============== REMIX ICONS ===============-->
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+{% block page-content %}
+{% load static %}
 
-        <!--=============== SWIPER CSS ===============-->
-        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-
-        <!--=============== CSS ===============-->
-        <link rel="stylesheet" href="assets/css/styles.css">
+{% block style %}
         <style>
         body {
         background: rgb(0,0,0);
@@ -61,80 +52,41 @@ background: linear-gradient(218deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9079229103750
       margin-bottom: 10px;
     }
   </style>
-  <title>Booking Successfully</title>
-</head>
+  {% endblock style %}
+  
 
-<body>
-    <!--==================== HEADER ====================-->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="index.html" class="nav__logo">
-                <i class="ri-steering-line"></i>
-                Hill Drive
-            </a>
 
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="index.html" class="nav__link ">Home</a>
-                    </li>
 
-                    <li class="nav__item">
-                        <a href="About.html" class="nav__link ">About</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="contact.html" class="nav__link">Contact</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="cars.html" class="nav__link">Cars</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="login.html" class="nav__link">Login</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="register.html" class="nav__link">Register</a>
-                    </li>
-
-                </ul>
-
-                <div class="nav__close" id="nav-close">
-                    <i class="ri-close-line"></i>
-                </div>
-            </div>
-
-            <!-- Toggle button -->
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="ri-menu-line"></i>
-            </div>
-        </nav>
-    </header>
-<section = class="offer section">
-  <h1>Car Booked Successfully</h1>
+<section  class="offer section">
+  <h1>Car booked successfully.Please make the payment</h1>
 <br>
+<form method="POST" >
+  {% csrf_token %}
 <div class="container">
 
     <div class="car-details">
 
-      <img src="car-image.jpg" alt="Car Image">
+      <img src="{% static image.url %}" alt="Car Image">
 
       <h2>Car Details</h2>
+      <p>Make: <strong id="car-make">{{name}}</strong></p>
 
-      <p>Make: <strong id="car-make"></strong></p>
+      <p>Model: <strong id="car-model">{{model}}</strong></p>
 
-      <p>Model: <strong id="car-model"></strong></p>
-
-      <p>Year: <strong id="car-year"></strong></p>
-
-      <p>Color: <strong id="car-color"></strong></p>
+      <p>Rent: <strong id="car-model">{{hours_rent}}</strong></p>
 
       <p>License Plate: <strong id="license-plate"></strong></p>
 
     </div>
-
+    <input type="hidden" name="user_id" value="{{user.id}}">
+    <input type="hidden" name="car_id" value="{{car_id}}">
+    <input type="hidden" name="hours_rent" value="{{hours_rent}}">
+    <input type="hidden" name="name" value="{{name}}">
+    <input type="hidden" name="model" value="{{model}}">
+    <input type="hidden" name="fuel_type" value="{{fuel_type}}">
+    <input type="hidden" name="pickup_date" value="{{pickup_date_str}}">
+    <input type="hidden" name="return_date" value="{{return_date_str}}">
+    
 
    <div class="bill-details">
       <div class="bill">
@@ -153,130 +105,53 @@ background: linear-gradient(218deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9079229103750
       </div>
     </div>
   </div>
+  <button id="rzp-button1" type="submit">Pay with Razorpay</button>
+</form>
+  {% block script %}
   <script>
-    // Fetch data and populate details
-    const carDetails = {
-      make: 'Car Make',
-      model: 'Car Model',
-      year: 'Car Year',
-      color: 'Car Color',
-      licensePlate: 'License Plate Number'
+    var options = {
+        "key": "rzp_test_ndIcE1FtwItuzq", // Enter the Key ID generated from the Dashboard
+        "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "hill drive",
+        "description": "book car",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+          var redirectURL = 'http://127.0.0.1:8000/payment-success/?razorpay_payment_id=' + response.razorpay_payment_id + '&razorpay_order_id=' + response.razorpay_order_id + '&razorpay_signature=' + response.razorpay_signature;
+           window.location.href = redirectURL;
+        },
+       
+        "theme": {
+            "color": "#3399cc"
+        }
     };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response){
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
 
-    const paymentDetails = {
-      amountPaid: '$XX,XXX.XX'
-    };
-
-    const billDetails = {
-      billDate: 'June 3, 2023',
-      billNumber: '123456789'
-    };
-
-    const receiptNumber = '987654321';
-
-    document.getElementById('car-make').textContent = carDetails.make;
-    document.getElementById('car-model').textContent = carDetails.model;
-    document.getElementById('car-year').textContent = carDetails.year;
-    document.getElementById('car-color').textContent = carDetails.color;
-    document.getElementById('license-plate').textContent = carDetails.licensePlate;
-
-    document.getElementById('amount-paid').textContent = paymentDetails.amountPaid;
-
-    document.getElementById('bill-date').textContent = billDetails.billDate;
-    document.getElementById('bill-number').textContent = billDetails.billNumber;
-
-    document.getElementById('receipt-number').textContent = receiptNumber;
-  </script>
-  <footer class="footer section">
-    <div class="shape shape__big"></div>
-    <div class="shape shape__small"></div>
-
-    <div class="footer__container container grid">
-        <div class="footer__content">
-            <a href="#" class="footer__logo">
-                <i class="ri-steering-line"></i> Hill Drive
-            </a>
-            <p class="footer__description">
-                We offer the best self drive cars of <br> 
-                the most recognized brands in <br> 
-                India.
-            </p>
-        </div>
-
-        <div class="footer__content">
-            <h3 class="footer__title">
-                Company
-            </h3>
-
-            <ul class="footer__links">
-                <li>
-                    <a href="About.html" class="footer__link">About</a>    
-                </li>
-                <li>
-                    <a href="cars.html" class="footer__link">Cars</a>
-                </li>
-                
-        </div>
-
-        <div class="footer__content">
-            <h3 class="footer__title">
-                Information
-            </h3>
-
-            <ul class="footer__links">
-                <li>
-                    <a href="T&C.html" class="footer__link">Terms & Conditions</a>
-                </li>
-                <li>
-                    <a href="privacypolicy.html" class="footer__link">Privacy Policy</a>
-                </li>
-                <li>
-                    <a href="contact.html" class="footer__link">Contact us</a>
-                </li>
-               
-            </ul>
-        </div>
-
-        <div class="footer__content">
-            <h3 class="footer__title">
-                Follow us
-            </h3>
-
-            <ul class="footer__social">
-                <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
-                    <i class="ri-facebook-fill"></i>
-                </a>
-                <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
-                    <i class="ri-instagram-line"></i>
-                </a>
-                <a href="https://twitter.com/" target="_blank" class="footer__social-link">
-                    <i class="ri-twitter-line"></i>
-                </a>
-            </ul>
-        </div>
-    </div>
-
-    <span class="footer__copy">
-        &#169; 2023 Hill Drive. All rigths reserved
-    </span>
-</footer>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
+
+  {% endblock script %}
 <!--========== SCROLL UP ==========-->
 <a href="#" class="scrollup" id="scroll-up">
     <i class="ri-arrow-up-line"></i>
-</a>
 
-<!--=============== SCROLL REVEAL ===============-->
-<script src="assets/js/scrollreveal.min.js"></script>
+  </a>
 
-<!--=============== SWIPER JS ===============-->
-<script src="assets/js/swiper-bundle.min.js"></script>
 
-<!--=============== MIXITUP JS ===============-->
-<script src="assets/js/mixitup.min.js"></script>
-
-<!--=============== MAIN JS ===============-->
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+{% endblock page-content %}

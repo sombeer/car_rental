@@ -109,9 +109,10 @@
         <form method="get" action="/booking/" enctype="multipart/form-data" >
                 {% csrf_token %}
             <img class="car-model__image" src="{% static car.image.url %}" alt="{{ car.model }}">
-            <input type="hidden" value=" {{pickup_date}}" name="pickup_date" id="pickup_date">
-            <input type="hidden" value=" {{return_date}}" name="return_date" id="return_date">
-            <input type="hidden" value=" {{pickup_date}}" name="pickup_date" id="pickup_date">
+            <input type="hidden" value="{{ pickup_date }}" name="pickup_date" id="pickup_date">
+            <input type="hidden" value="{{ return_date }}" name="return_date" id="return_date">
+            <input type="hidden" value="{{ car.id }}" name="car_id" id="car_id">
+
 
             <h3 class="car-model__title">{{ car.model }} {{ car.name }}</h3>
             <div class="car-model__details">

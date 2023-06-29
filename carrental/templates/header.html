@@ -1,6 +1,6 @@
 <header class="header" id="header">
     <nav class="nav container">
-        <a href="index.html" class="nav__logo">
+        <a href="" class="nav__logo">
             <i class="ri-steering-line"></i>
             Hill Drive
         </a>
@@ -18,9 +18,17 @@
                 <li class="nav__item">
                     <a href="/contact" class="nav__link">Contact</a>
                 </li>
-
-               
-
+                {% if user.is_authenticated %}
+                <li class="nav__item nav__dropdown">
+                    <a href="#" class="nav__link">Profile <i class="ri-arrow-down-s-line"></i></a>
+                    <ul class="nav__dropdown-menu">
+                        <li><a href="/profile">View Profile</a></li>
+                        <li><a href="/user-booking">View Booking</a></li>
+                
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+                {% else %}
                 <li class="nav__item">
                     <a href="/login" class="nav__link">Login</a>
                 </li>
@@ -28,7 +36,7 @@
                 <li class="nav__item">
                     <a href="/register" class="nav__link">Register</a>
                 </li>
-
+                {% endif %}
             </ul>
             <div class="nav__close" id="nav-close">
                 <i class="ri-close-line"></i>
