@@ -311,16 +311,17 @@ def otp_verification(request, user_email):
     if request.method == 'POST':
         entered_otp = int(request.POST.get('otp'))
         user = get_object_or_404(Customer, email=user_email)
-        
-        if str(entered_otp) == user.email_code:
+        print(entered_otp)
+        if entered_otp == user.email_code:
             user.is_active = True
             user.save()
+            messages.success(request,"your email is verified,now you can login your account")
             return render(request, 'index.html')
         else:
             error_message = "Invalid OTP. Please try again."
-            return render(request, 'car_rental/otp.html', {'error_message': error_message})
+            return render(request, 'otp.html', {'error_message': error_message})
     else:
-        return render(request, 'car_rental/otp.html')
+        return render(request, 'otp.html')
 
     
 def logout_user(request):
